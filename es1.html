@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Es1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+               <header class="bg-gray-800 text-white p-4 text-center">
+                <h1 class="text-center">cicalino</h1>
+                <div id="toggle-container" class="mt-4"></div>
+            </header>
+            
+            <div class="container mx-auto p-4">
+                <div class="flex">
+                    <div class="w-1/2 p-4 bg-blue-500" id="students-block">
+                        <h2 class="text-xl font-bold">Studenti</h2>
+                        <div id="students-list"></div>
+                    </div>
+                    <div class="w-1/2 p-4 bg-pink-500" id="female-students-block">
+                        <h2 class="text-xl font-bold">Studentesse</h2>
+                        <div id="female-students-list"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="fixed bottom-0 w-full bg-gray-800 text-white p-2 text-center">
+                <p>Dati sensibili non guardare.</p>
+            </footer>
+            
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let students = [
+                        {id: 1, fullname: "mario rossi", avg: 6, gender: "m"},
+                        {id: 2, fullname: "luigi verdi", avg: 4, gender: "m"},
+                        {id: 3, fullname: "peach pink", avg: 8, gender: "f"},
+                        {id: 4, fullname: "wario rossi", avg: 9, gender: "m"},
+                        {id: 5, fullname: "daisy gialli", avg: 7, gender: "f"}
+                    ];
+        
+                    let darkMode = false;
+        
+                    function renderStudents() {
+                        let studentsList = document.getElementById("students-list");
+                        studentsList.innerHTML = "";
+        
+                        let femaleStudentsList = document.getElementById("female-students-list");
+                        femaleStudentsList.innerHTML = "";
+        
+                        students.forEach(function(student) {
+                            let studentBlock = document.createElement("div");
+                            studentBlock.className = "text-white p-2 rounded mb-2";
+                            studentBlock.textContent = student.fullname + " (Avg: " + student.avg + ")";
+                            if (student.gender === "f") {
+                                studentBlock.classList.add("bg-pink-500");
+                                femaleStudentsList.appendChild(studentBlock);
+                            } else {
+                                studentBlock.classList.add("bg-blue-500");
+                                studentsList.appendChild(studentBlock);
+                            }
+                        });
+                    }
+        
+                    function toggleMode() {
+                        let studentsBlock = document.getElementById("students-block");
+                        let femaleStudentsBlock = document.getElementById("female-students-block");
+        
+                        studentsBlock.classList.toggle("order-last");
+                        femaleStudentsBlock.classList.toggle("order-first");
+        
+                        let studentsList = document.getElementById("students-list");
+                        studentsList.innerHTML = "";
+        
+                        let femaleStudentsList = document.getElementById("female-students-list");
+                        femaleStudentsList.innerHTML = "";
+        
+                        darkMode = !darkMode;
+                        if (darkMode) {
+                            document.body.classList.add("bg-gray-900");
+                            document.body.classList.remove("bg-gray-100");
+                        } else {
+                            document.body.classList.remove("bg-gray-900");
+                            document.body.classList.add("bg-gray-100");
+                        }
+        
+                        renderStudents();
+                    }
+        
+                    renderStudents();
+        
+                    let toggleButton = document.createElement("button");
+                    toggleButton.className = "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded";
+                    toggleButton.textContent = "Toggle Light/Dark mode";
+                    toggleButton.addEventListener("click", toggleMode);
+        
+                    let toggleContainer = document.getElementById("toggle-container");
+                    toggleContainer.appendChild(toggleButton);
+                });
+            </script>
+     </body>
+    </html>
+        

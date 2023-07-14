@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confronto voti</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-cover bg-center" style="background-image: url('https://www.rollingstone.it/wp-content/uploads/2021/12/GettyImages-1160980944.jpg')">
+  <div class="flex flex-col items-center justify-center h-screen p-4">
+    <div class="mb-4">
+      <input id="mario-rossi-slider" class="w-96 text-blue-500" type="range" min="1" max="10" value="3">
+      <span id="mario-rossi-counter" class="ml-2 text-blue-500">3</span>
+    </div>
+    <div class="mb-4">
+      <input id="luigi-verdi-slider" class="w-96 text-blue-500" type="range" min="1" max="10" value="3">
+      <span id="luigi-verdi-counter" class="ml-2 text-blue-500">3</span>
+    </div>
+    <div id="comparison-message" class="font-bold mt-4 text-red-500">Mario Rossi e Luigi Verdi sono pari</div>
+  </div>
+
+  <script>
+    const marioRossiSlider = document.getElementById('mario-rossi-slider');
+    const marioRossiCounter = document.getElementById('mario-rossi-counter');
+    const luigiVerdiSlider = document.getElementById('luigi-verdi-slider');
+    const luigiVerdiCounter = document.getElementById('luigi-verdi-counter');
+    const comparison = document.getElementById('comparison');
+
+    // Aggiungere event listener per gli slider
+    marioRossiSlider.addEventListener('input', update);
+    luigiVerdiSlider.addEventListener('input', update);
+
+    // Inizializzare i valori dei contatori 
+    let marioRossiVote = 3;
+    let luigiVerdiVote = 3;
+    update();
+
+    // Funzione per aggiornare i contatori e il messaggio 
+    function update() {
+      // Aggiornare i contatori
+      marioRossiVote = parseInt(marioRossiSlider.value);
+      luigiVerdiVote = parseInt(luigiVerdiSlider.value);
+      marioRossiCounter.textContent = marioRossiVote;
+      luigiVerdiCounter.textContent = luigiVerdiVote;
+
+      // Confronta i voti e aggiorna il messaggio di confronto
+      if (marioRossiVote > luigiVerdiVote) {
+        comparison.textContent = 'Mario Rossi è in vantaggio';
+      } else if (marioRossiVote < luigiVerdiVote) {
+        comparison.textContent = 'Luigi Verdi è in vantaggio';
+      } else {
+        comparison.textContent = 'Mario Rossi e Luigi Verdi sono pari';
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
